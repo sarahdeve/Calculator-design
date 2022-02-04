@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>calculator</title>
+	
+	<style>
+
+	table, th, td {
+		text-align: center;
+		border: 1px solid black;
+		padding: 9px;
+		border-spacing: 10px;
+		border-radius: 10px; 
+		background-color: #eeeeee;
+	}	
+
+	button {
+		border-radius: 50%;
+		height: 30px;
+		width: 30px;
+		border:none;
+		background-color: white;
+		cursor: pointer;
+	}	
+	.ton button {
+	background-color: red; 
+		color: white;
+		opacity: 0.6;
+		 transition: 0.3s;
+		  display: inline-block; 
+		  cursor: pointer;
+		  /*box-shadow: 1px;*/
+		  border-radius: 3px;
+		  height: 15px;
+
+	}
+	.ton button:hover {
+		opacity: 1;
+		margin-left: 100px;
+	}
+	.cursor {
+		pointer-events: cursor ;
+	}
+	
+
+	/*table#fowl {background-color};*/
+		
+</style>
+</head>
+<body>
+	<center>
+		
+	<table id="fowl" border="1" style="background: grey"> 
+		<!-- <tr class="ton">
+			 <td colspan="5" >
+				<button class="button1" style="cursor: pointer;" onclick="show()" ><u>V</u>iew</button>&nbsp;&nbsp;
+				<button class="button2" style="cursor: pointer;" onclick="show()"  ><u>E</u>dit</button>&nbsp;&nbsp;		
+				
+			</td> -->
+		</tr>
+		<tr>
+			<th colspan='5' style="border-radius: 10px;">
+				<input  style="text-align: left; width: 250px; border: none; height:30px; padding-left: 1px;" value=""; id="d" name="" disabled=""; placeholder="0">
+				<br>
+				<input style="text-align: right; width: 250px; border: none; height: 30px; padding-left: 1px;" type="" placeholder="Answers" disabled="read only" name="" id="giv">
+				<!-- <input type="text" style="text-align: right; width: 100%;border: none; height:30px; font-weight: bolder; padding-right: 3px;" value=""; id="e" name=""> -->
+			</th>
+		</tr>
+		
+		<tr style="">
+
+			<td style=" background: black; color: white;" id="greaterthan" onclick="show('<')"><</td>
+			<td style="background: black; color: white;" id="in" onclick="show('(')">(</td>
+			<td style="background: black; color: white;" id="out" onclick="show(')')" >)</td>
+			<td style="background: black; color: white;" id="multiply" onclick="show('>')" >></td>
+			<td style="background: black; color: white;" id="power" onclick="show('%')" >%</td>
+		</tr>
+		<tr>
+			<td style="background: black; color: white" onclick="cs('')">cos</td>
+			<td style="background: black; color: white" onclick="sn()">sin</td>
+			<td style=" background: black; color: white" onclick="tn()">tan</td>
+			<td style=" background: black; color:white" onclick="lg()">log</td>
+			<td id="menu" onclick="elim()" style="background: red; color: white">OFF</button> </td>	
+
+		</tr>
+		<tr>
+			<td style="background: black; color: white;">y<sup>2</sup></td>
+			<td  style="background: black; color: white;">∼</td>
+			<td  style="background: black; color: white;">√</td>
+			<td style="background: black; color: white;" onclick="pii('⊼')">⊼</td>
+			<td><button id="but" onclick="changeValue()" value="">OFF</button></td>
+			<!-- <td><button></button></td> -->
+			
+		</tr>
+		<tr style=" background-color: lightblue;">
+			<td style=" border-radius: 60px;"><button id="seven" onclick="show('7')">7</button></td>
+			<td style=" border-radius: 60px;"><button id="eight" onclick="show('8')">8</button></td> 
+			<td style=" border-radius: 60px;"><button id="nine" onclick="show('9')">9</button></td>
+			<td style="background-color: black; color: white; margin-left:2px;" class="cursor" onclick="del()">DEL</td>
+			<td style="background: black; color: white" id="clean" onclick="cle()">CLE</td>
+			
+		</tr>
+		<tr>	
+			<td style="border-radius: 60px;"><button id="four" onclick="show('4')">4</button></td>
+			<td style="border-radius: 60px;"><button id="five" onclick="show('5')">5</button></td>
+			<td style="border-radius: 60px;"><button  id="six" onclick="show('6')">6</button></td>
+			<td style="background: black; color: white" id="divide" onclick="show('/')">/</td>
+			<td style="background: black; color: white" id="modulus" onclick="show('+')">+</td>	
+		</tr>
+		<tr>
+			<td style=" border-radius: 60px;"><button id="one" onclick="show('1')">1</button></td>
+			<td style=" border-radius: 60px;"><button id="two" onclick="show('2')">2</button></td>
+			<td style=" border-radius: 60px;"><button id="three" onclick="show('3')">3</button></td>
+			<td style=" background: black; color: white" id="minus" onclick="show('-')">-</td>
+			<td style=" font-size: 20px; background: black; color: white" rowspan="2" id="eqto" onclick="equal()">=</td>		
+		</tr>
+		<tr>
+			<td style="" colspan="2"><button id="zero" onclick="show('0')">0</button></td>	
+			<td style="background: black; color: white" id="" onclick="show('*')">*</button></td>
+			
+			<td style="font-size: 30px; background: black; color: white" id="dot" onclick="show('.')" >∙</td>
+			
+			
+		</tr>
+	</table>
+	</center>
+	<script>
+		var check = true;
+		var power;
+		function elim() {
+			check = false;
+		}
+		
+		function del() 
+		{
+			d.value ="";
+		}
+		
+		function show(e) 
+		{	
+			if (check) {
+				d.value += e;
+			} else {
+				d.value = "";
+			}
+		}
+		function pii(e){
+			// alert('here');
+			giv.value = d.value * Math.PI;
+			d.value = d.value + ""+ e;
+		}
+		
+		function cle()
+		{
+			d.value = d.value.slice (0, -1);
+			giv.value = 0;
+		}
+		
+		function equal()
+		{
+			// giv.value = Math.cos(d.value.substr(4) + e);
+			giv.value = eval(d.value);
+		}
+
+		function sn() 
+		{
+			giv.value = eval()
+		}
+		
+		function sn()
+		{
+			giv.value = Math.sin(d.value);
+		}
+
+		function cs(e) 
+		{
+			d.value = "cos(" + d.value + e;
+			// console.log(d.value.substr(4))
+			// console.log(Math.cos(d.value.substr(4)));
+			// d.value = e+d.value+")";
+		}
+
+		function tn() 
+		{
+			giv.value = Math.tan(d.value);
+		}
+		
+		function lg() 
+		{
+			giv.value = Math.SQRT2(d.value);
+		}
+
+		 
+
+		var b = true;
+		
+		 
+		function changeValue() 
+		{
+
+			
+
+			if (b) 
+			{
+
+				document.getElementById('but').innerHTML = "ON";
+				document.getElementById('but').style.background = "red";
+				document.getElementById('d').value = "";
+				//document.getElementById('d').value = "The calculator is off.";
+				//document.getElementById('giv').value = "Answers.";
+				 // document.getElementById('eqto').value = "";
+				 check = false;				
+															
+			}
+			else {
+				document.getElementById('but').innerHTML = "ON";
+				document.getElementById('but').style.background = "green";
+				document.getElementById('d').value = "";
+				
+			}
+		}
+
+	
+	</script>
+</body>
+</html>
